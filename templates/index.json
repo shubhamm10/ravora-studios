@@ -1,16 +1,39 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
       "type": "hero",
-      "settings": {}
+      "settings": {
+        "heading_line_1": "Architectural 3D Printed",
+        "heading_highlight": "Ambient Lamps",
+        "heading_line_2": "for",
+        "heading_line_3": "Modern Interiors.",
+        "button_text": "Explore Collection",
+        "button_link": "shopify://collections/all",
+        "marquee_collection": "",
+        "marquee_speed": 30,
+        "watermark_text": "RAVORA"
+      }
     },
     "featured-products": {
       "type": "featured-products",
-      "settings": {}
+      "settings": {
+        "label": "Featured",
+        "heading": "Light That Feels Like",
+        "heading_highlight": "Architecture",
+        "collection": "lamps"
+      }
     },
     "studio-values": {
       "type": "studio-values",
-      "settings": {},
       "blocks": {
         "val1": {
           "type": "value",
@@ -46,11 +69,15 @@
         "val2",
         "val3",
         "val4"
-      ]
+      ],
+      "settings": {
+        "label": "Our Process",
+        "heading": "Studio",
+        "heading_highlight": "Values"
+      }
     },
     "process-steps": {
       "type": "process-steps",
-      "settings": {},
       "blocks": {
         "step1": {
           "type": "step",
@@ -90,11 +117,15 @@
         "step2",
         "step3",
         "step4"
-      ]
+      ],
+      "settings": {
+        "label": "The Process",
+        "heading": "How It's",
+        "heading_highlight": "Made"
+      }
     },
     "our-story": {
       "type": "our-story",
-      "settings": {},
       "blocks": {
         "stat1": {
           "type": "stat",
@@ -122,18 +153,23 @@
         "stat1",
         "stat2",
         "stat3"
-      ]
+      ],
+      "settings": {
+        "heading": "Where Technology Meets",
+        "heading_highlight": "Craftsmanship",
+        "description": "Every RAVORA lamp begins as a digital sculpture, refined through countless iterations before being brought to life layer by layer. The result is a harmony of precision engineering and organic beauty — lighting that transforms spaces and elevates everyday moments."
+      }
     },
     "in-situ": {
       "type": "in-situ",
-      "settings": {},
       "blocks": {
         "space1": {
           "type": "space",
           "settings": {
             "room_name": "Bedroom",
             "subtitle": "Calm ambient glow",
-            "product_name": "LumiTwist Ambient Lamp"
+            "product_name": "LumiTwist Ambient Lamp",
+            "link": ""
           }
         },
         "space2": {
@@ -141,18 +177,29 @@
           "settings": {
             "room_name": "Living Room",
             "subtitle": "Shelf accent lighting",
-            "product_name": "FlameGlow Art Lamp"
+            "product_name": "FlameGlow Art Lamp",
+            "link": ""
           }
         }
       },
       "block_order": [
         "space1",
         "space2"
-      ]
+      ],
+      "settings": {
+        "label": "In Situ",
+        "heading": "Lighting In Real",
+        "heading_highlight": "Spaces"
+      }
     },
     "testimonial": {
       "type": "testimonial",
-      "settings": {}
+      "settings": {
+        "label": "What People Say",
+        "quote": "These lamps transform a room. The quality of light, the texture, the form — it's like having a piece of sculpture that also happens to illuminate your life.",
+        "author": "Interior Design Enthusiast",
+        "author_title": "Verified Customer"
+      }
     }
   },
   "order": [
