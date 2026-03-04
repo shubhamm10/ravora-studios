@@ -1,0 +1,78 @@
+<!-- Studio Values / Our Process -->
+<section class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4">{{ section.settings.label }}</p>
+      <h2 class="text-4xl md:text-5xl font-serif">{{ section.settings.heading }} <span class="italic text-primary">{{ section.settings.heading_highlight }}</span></h2>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for block in section.blocks %}
+        <div class="border border-white/10 rounded-2xl p-8 hover:border-primary/30 transition-colors group" {{ block.shopify_attributes }}>
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-6">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h3 class="text-base font-medium mb-3">{{ block.settings.title }}</h3>
+          <p class="text-sm text-muted-foreground font-light leading-relaxed">{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Studio Values",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section Label",
+      "default": "Our Process"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Studio"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Highlighted Word (gold italic)",
+      "default": "Values"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "value",
+      "name": "Value Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Value Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description of this value."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Studio Values",
+      "blocks": [
+        { "type": "value", "settings": { "title": "Designed in Studio", "description": "Every form begins as a digital sculpture — sketched, modeled, and refined in 3D software until every curve is intentional." } },
+        { "type": "value", "settings": { "title": "Precision 3D Printed", "description": "Layer by layer, each piece is built with sub-millimeter precision over 12–24 hours." } },
+        { "type": "value", "settings": { "title": "Small Batch Production", "description": "Limited runs ensure quality and exclusivity. Each piece is individually numbered." } },
+        { "type": "value", "settings": { "title": "Sustainable Materials", "description": "Made from plant-based bioplastics and recycled bio-polymers. Designed to be kind to the earth." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

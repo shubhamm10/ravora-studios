@@ -1,0 +1,46 @@
+<!-- Testimonial Section -->
+<section class="py-28 px-6">
+  <div class="max-w-4xl mx-auto text-center">
+    <p class="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-10">{{ section.settings.label }}</p>
+    <blockquote class="text-2xl md:text-3xl lg:text-[2.2rem] font-serif leading-relaxed text-white/90 mb-10">
+      "{{ section.settings.quote }}"
+    </blockquote>
+    <div>
+      <p class="text-sm font-medium text-white">{{ section.settings.author }}</p>
+      <p class="text-xs text-muted-foreground font-light mt-1">{{ section.settings.author_title }}</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Testimonial",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section Label",
+      "default": "What People Say"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote Text",
+      "default": "These lamps transform a room. The quality of light, the texture, the form — it's like having a piece of sculpture that also happens to illuminate your life."
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author Name",
+      "default": "Interior Design Enthusiast"
+    },
+    {
+      "type": "text",
+      "id": "author_title",
+      "label": "Author Title",
+      "default": "Verified Customer"
+    }
+  ],
+  "presets": [{ "name": "Testimonial" }]
+}
+{% endschema %}

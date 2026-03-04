@@ -1,0 +1,63 @@
+<section class="max-w-7xl mx-auto px-6 py-20 pb-32">
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+    {% assign featured_collection = collections[section.settings.collection] %}
+    
+    {% if featured_collection.products.size > 0 %}
+      {% for product in featured_collection.products limit: section.settings.products_to_show %}
+        {% render 'product-card', product: product %}
+      {% endfor %}
+    {% else %}
+      {% comment %} Fallback for empty state or missing collection {% endcomment %}
+      {% for i in (1..4) %}
+        <div class="group block relative">
+          <div class="relative overflow-hidden rounded-xl bg-white/5 aspect-[4/5] mb-4 flex items-center justify-center">
+            <span class="text-muted-foreground">Product {{ i }}</span>
+            <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-4">
+              <div class="glass text-white hover:bg-white/10 rounded-xl px-5 py-3 text-xs md:text-sm tracking-widest uppercase transition-colors cursor-pointer">
+                Quick View
+              </div>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-sm font-medium mb-1 text-white">Sample Lamp {{ i }}</h3>
+            <p class="text-primary text-sm font-medium">₹2,499</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+
+  <div class="mt-16 text-center">
+    <a href="/collections/all" class="text-muted-foreground hover:text-white transition-colors text-sm font-light tracking-widest uppercase flex items-center justify-center gap-2">
+      View All Products
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+    </a>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Featured Collection",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 4,
+      "max": 12,
+      "step": 4,
+      "default": 4,
+      "label": "Maximum products to show"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Featured Collection"
+    }
+  ]
+}
+{% endschema %}

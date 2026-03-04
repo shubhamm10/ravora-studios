@@ -1,0 +1,163 @@
+<section class="relative min-h-screen flex flex-col items-center justify-center pt-28 pb-0 overflow-hidden">
+  <!-- Faint watermark behind the carousel -->
+  <div class="absolute bottom-[10%] left-1/2 -translate-x-1/2 text-[18vw] font-serif italic text-white/[0.03] whitespace-nowrap pointer-events-none select-none leading-none tracking-tight z-0">
+    {{ section.settings.watermark_text }}
+  </div>
+
+  <!-- Hero text content -->
+  <div class="text-center px-6 relative z-10 mb-12">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif leading-tight tracking-tight mb-8">
+      {{ section.settings.heading_line_1 }}<br>
+      <span class="italic text-primary">{{ section.settings.heading_highlight }}</span> {{ section.settings.heading_line_2 }}<br>
+      {{ section.settings.heading_line_3 }}
+    </h1>
+    <a href="{{ section.settings.button_link }}" class="inline-block bg-primary text-primary-foreground px-10 py-4 rounded-xl text-sm tracking-widest uppercase font-medium hover:bg-primary/90 transition-all hover:-translate-y-0.5">
+      {{ section.settings.button_text }}
+    </a>
+  </div>
+  
+  <!-- Auto-scrolling product marquee carousel -->
+  <div class="w-full overflow-hidden relative z-10 mt-8">
+    <div class="flex gap-5 animate-product-marquee whitespace-nowrap">
+      {% assign marquee_collection = section.settings.marquee_collection | default: 'all' %}
+      {% assign product_collection = collections[marquee_collection] %}
+      {% if product_collection.products.size > 0 %}
+        {% for product in product_collection.products %}
+          <a href="{{ product.url }}" class="inline-block flex-shrink-0 w-[260px] group">
+            <div class="rounded-2xl overflow-hidden aspect-[3/4] bg-white/5 mb-3">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-30' }}
+              {% endif %}
+            </div>
+            <p class="text-sm font-medium truncate">{{ product.title }}</p>
+            <p class="text-primary text-sm font-medium">{{ product.price | money }}</p>
+          </a>
+        {% endfor %}
+        <!-- Duplicate for seamless loop -->
+        {% for product in product_collection.products %}
+          <a href="{{ product.url }}" class="inline-block flex-shrink-0 w-[260px] group">
+            <div class="rounded-2xl overflow-hidden aspect-[3/4] bg-white/5 mb-3">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-30' }}
+              {% endif %}
+            </div>
+            <p class="text-sm font-medium truncate">{{ product.title }}</p>
+            <p class="text-primary text-sm font-medium">{{ product.price | money }}</p>
+          </a>
+        {% endfor %}
+      {% else %}
+        {% for i in (1..8) %}
+          <div class="inline-block flex-shrink-0 w-[260px]">
+            <div class="rounded-2xl overflow-hidden aspect-[3/4] bg-white/5 mb-3"></div>
+            <p class="text-sm font-medium">Sample Lamp</p>
+            <p class="text-primary text-sm font-medium">₹2,499</p>
+          </div>
+        {% endfor %}
+      {% endif %}
+    </div>
+  </div>
+  
+  <!-- Scroll indicator -->
+  <div class="flex justify-center py-12 text-muted-foreground animate-bounce">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 9l6 6 6-6"/></svg>
+  </div>
+</section>
+
+<style>
+@keyframes product-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-product-marquee {
+  animation: product-marquee {{ section.settings.marquee_speed }}s linear infinite;
+}
+.animate-product-marquee:hover {
+  animation-play-state: paused;
+}
+</style>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Heading"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_1",
+      "label": "Heading Line 1",
+      "default": "Architectural 3D Printed"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Highlighted Word (gold italic)",
+      "default": "Ambient Lamps"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_2",
+      "label": "Text after highlight",
+      "default": "for"
+    },
+    {
+      "type": "text",
+      "id": "heading_line_3",
+      "label": "Heading Line 3",
+      "default": "Modern Interiors."
+    },
+    {
+      "type": "header",
+      "content": "Button"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Explore Collection"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link",
+      "default": "/collections/all"
+    },
+    {
+      "type": "header",
+      "content": "Product Marquee"
+    },
+    {
+      "type": "collection",
+      "id": "marquee_collection",
+      "label": "Marquee Collection"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "label": "Marquee Speed (seconds)",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 30,
+      "unit": "s"
+    },
+    {
+      "type": "header",
+      "content": "Watermark"
+    },
+    {
+      "type": "text",
+      "id": "watermark_text",
+      "label": "Watermark Text",
+      "default": "RAVORA"
+    }
+  ],
+  "presets": [{ "name": "Hero" }]
+}
+{% endschema %}

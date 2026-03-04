@@ -1,0 +1,85 @@
+<!-- How It's Made Process Section -->
+<section class="py-24 px-6 bg-zinc-950">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4">{{ section.settings.label }}</p>
+      <h2 class="text-4xl md:text-5xl font-serif">{{ section.settings.heading }} <span class="italic text-primary">{{ section.settings.heading_highlight }}</span></h2>
+    </div>
+    
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {% for block in section.blocks %}
+        <div class="border border-white/10 rounded-2xl p-8 relative overflow-hidden group hover:border-primary/30 transition-colors" {{ block.shopify_attributes }}>
+          <span class="absolute top-4 right-6 text-6xl font-serif text-white/5 font-bold">{{ block.settings.step_number }}</span>
+          <div class="flex items-center justify-center w-12 h-12 rounded-xl bg-primary/10 text-primary mb-6">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 class="text-base font-medium mb-3">{{ block.settings.title }}</h3>
+          <p class="text-sm text-muted-foreground font-light leading-relaxed">{{ block.settings.description }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Process Steps",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section Label",
+      "default": "The Process"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How It's"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Highlighted Word (gold italic)",
+      "default": "Made"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Process Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "step_number",
+          "label": "Step Number",
+          "default": "01"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Step Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Description of this step."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Process Steps",
+      "blocks": [
+        { "type": "step", "settings": { "step_number": "01", "title": "Design & Concept", "description": "Every lamp begins as a digital sculpture — sketched, modeled, and refined in 3D software until every curve is intentional." } },
+        { "type": "step", "settings": { "step_number": "02", "title": "3D Printing", "description": "Using advanced FDM technology, each piece is built layer by layer with sub-millimeter precision over 12–24 hours." } },
+        { "type": "step", "settings": { "step_number": "03", "title": "Hand Finishing", "description": "Surfaces are carefully sanded, edges smoothed, and each lamp inspected to ensure flawless quality and texture." } },
+        { "type": "step", "settings": { "step_number": "04", "title": "Assembly & Testing", "description": "LED sockets are fitted, wiring is tested, and the final product is packaged in custom protective casing." } }
+      ]
+    }
+  ]
+}
+{% endschema %}

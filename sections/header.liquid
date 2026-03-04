@@ -1,0 +1,75 @@
+<header class="fixed top-0 w-full z-50 transition-all duration-300 bg-black/80 backdrop-blur-md text-white border-b border-white/10" id="MainHeader">
+  {% if section.settings.announcement_text != blank %}
+  <div class="bg-primary text-primary-foreground py-2 overflow-hidden flex whitespace-nowrap">
+    <div class="text-xs tracking-widest uppercase inline-block font-medium animate-marquee">
+      {{ section.settings.announcement_text }} &nbsp;&nbsp;&bull;&nbsp;&nbsp; {{ section.settings.announcement_text }} &nbsp;&nbsp;&bull;&nbsp;&nbsp; {{ section.settings.announcement_text }} &nbsp;&nbsp;&bull;&nbsp;&nbsp; {{ section.settings.announcement_text }} &nbsp;&nbsp;&bull;&nbsp;&nbsp; {{ section.settings.announcement_text }} &nbsp;&nbsp;&bull;&nbsp;&nbsp; {{ section.settings.announcement_text }}
+    </div>
+  </div>
+  {% endif %}
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <nav class="hidden md:flex gap-8 items-center text-sm tracking-widest uppercase font-light">
+      {% for link in linklists.main-menu.links %}
+        <a href="{{ link.url }}" class="hover:text-primary transition-colors">{{ link.title }}</a>
+      {% else %}
+        <a href="/collections/all" class="hover:text-primary transition-colors">SHOP</a>
+        <a href="/collections" class="hover:text-primary transition-colors">COLLECTION</a>
+        <a href="/pages/about" class="hover:text-primary transition-colors">ABOUT</a>
+      {% endfor %}
+    </nav>
+    <a href="{{ routes.root_url }}" class="text-3xl font-serif tracking-tight italic">Ravora</a>
+    <div class="flex items-center gap-6">
+      <a href="{{ routes.search_url }}" class="hover:text-primary transition-colors">
+        <span class="visually-hidden">Search</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+      </a>
+      <button onclick="openCartDrawer()" class="hover:text-primary transition-colors relative">
+        <span class="visually-hidden">Cart</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+        <span id="CartBadge" class="{% if cart.item_count == 0 %}hidden{% endif %} absolute -top-2 -right-2 bg-primary text-black text-[10px] w-4 h-4 flex items-center justify-center rounded-full font-bold">
+          {{ cart.item_count }}
+        </span>
+      </button>
+      <button class="md:hidden hover:text-primary transition-colors" onclick="document.getElementById('MobileMenu').classList.toggle('hidden')">
+        <span class="visually-hidden">Menu</span>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="MobileMenu" class="hidden md:hidden border-t border-white/10 px-6 py-4">
+    <nav class="flex flex-col gap-4 text-sm tracking-widest uppercase font-light">
+      {% for link in linklists.main-menu.links %}
+        <a href="{{ link.url }}" class="hover:text-primary transition-colors py-2">{{ link.title }}</a>
+      {% else %}
+        <a href="/collections/all" class="hover:text-primary transition-colors py-2">SHOP</a>
+        <a href="/collections" class="hover:text-primary transition-colors py-2">COLLECTION</a>
+        <a href="/pages/about" class="hover:text-primary transition-colors py-2">ABOUT</a>
+      {% endfor %}
+    </nav>
+  </div>
+</header>
+
+<style>
+.animate-marquee {
+  animation: marquee 20s linear infinite;
+}
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+</style>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "text",
+      "id": "announcement_text",
+      "label": "Announcement Text",
+      "default": "LAUNCH SALE — 30% OFF + FREE GIFT  ·  FREE DELIVERY ABOVE ₹1500"
+    }
+  ]
+}
+{% endschema %}

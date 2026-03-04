@@ -1,0 +1,49 @@
+<div class="max-w-7xl mx-auto px-6 py-12 pb-32 mt-20">
+  <h1 class="text-4xl md:text-5xl font-serif text-center mb-12">{{ collection.title | default: 'Shop' }}</h1>
+  
+  <!-- Tab Filters (Client-side, not page navigation) -->
+  <div class="w-full flex justify-center mb-12">
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <button data-filter-tab="all" onclick="filterProducts('all', this)" class="px-6 py-2.5 rounded-lg text-sm font-light tracking-widest uppercase transition-all duration-300 whitespace-nowrap bg-primary text-primary-foreground">
+        All
+      </button>
+      <button data-filter-tab="lamp" onclick="filterProducts('lamp', this)" class="px-6 py-2.5 rounded-lg text-sm font-light tracking-widest uppercase transition-all duration-300 whitespace-nowrap text-muted-foreground glass hover:text-white">
+        Lamps
+      </button>
+      <button data-filter-tab="planter" onclick="filterProducts('planter', this)" class="px-6 py-2.5 rounded-lg text-sm font-light tracking-widest uppercase transition-all duration-300 whitespace-nowrap text-muted-foreground glass hover:text-white">
+        Planters
+      </button>
+    </div>
+  </div>
+
+  <!-- Product Grid -->
+  <div class="w-full">
+    {% paginate collection.products by 12 %}
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+        {% for product in collection.products %}
+          <div data-product-type="{{ product.type | downcase }}">
+            {% render 'product-card', product: product %}
+          </div>
+        {% else %}
+          <div class="col-span-full py-20 text-center text-muted-foreground">
+            <p>No products found in this collection.</p>
+            <a href="/collections/all" class="text-primary hover:text-white mt-4 inline-block tracking-widest uppercase text-sm">Browse All</a>
+          </div>
+        {% endfor %}
+      </div>
+      
+      {% if paginate.pages > 1 %}
+        <div class="mt-16 flex justify-center gap-4 text-sm font-light tracking-widest uppercase">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Grid",
+  "settings": []
+}
+{% endschema %}

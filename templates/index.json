@@ -1,0 +1,167 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {}
+    },
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {}
+    },
+    "studio-values": {
+      "type": "studio-values",
+      "settings": {},
+      "blocks": {
+        "val1": {
+          "type": "value",
+          "settings": {
+            "title": "Designed in Studio",
+            "description": "Every form begins as a digital sculpture — sketched, modeled, and refined in 3D software until every curve is intentional."
+          }
+        },
+        "val2": {
+          "type": "value",
+          "settings": {
+            "title": "Precision 3D Printed",
+            "description": "Layer by layer, each piece is built with sub-millimeter precision over 12–24 hours."
+          }
+        },
+        "val3": {
+          "type": "value",
+          "settings": {
+            "title": "Small Batch Production",
+            "description": "Limited runs ensure quality and exclusivity. Each piece is individually numbered."
+          }
+        },
+        "val4": {
+          "type": "value",
+          "settings": {
+            "title": "Sustainable Materials",
+            "description": "Made from plant-based bioplastics and recycled bio-polymers. Designed to be kind to the earth."
+          }
+        }
+      },
+      "block_order": [
+        "val1",
+        "val2",
+        "val3",
+        "val4"
+      ]
+    },
+    "process-steps": {
+      "type": "process-steps",
+      "settings": {},
+      "blocks": {
+        "step1": {
+          "type": "step",
+          "settings": {
+            "step_number": "01",
+            "title": "Design & Concept",
+            "description": "Every lamp begins as a digital sculpture — sketched, modeled, and refined in 3D software until every curve is intentional."
+          }
+        },
+        "step2": {
+          "type": "step",
+          "settings": {
+            "step_number": "02",
+            "title": "3D Printing",
+            "description": "Using advanced FDM technology, each piece is built layer by layer with sub-millimeter precision over 12–24 hours."
+          }
+        },
+        "step3": {
+          "type": "step",
+          "settings": {
+            "step_number": "03",
+            "title": "Hand Finishing",
+            "description": "Surfaces are carefully sanded, edges smoothed, and each lamp inspected to ensure flawless quality and texture."
+          }
+        },
+        "step4": {
+          "type": "step",
+          "settings": {
+            "step_number": "04",
+            "title": "Assembly & Testing",
+            "description": "LED sockets are fitted, wiring is tested, and the final product is packaged in custom protective casing."
+          }
+        }
+      },
+      "block_order": [
+        "step1",
+        "step2",
+        "step3",
+        "step4"
+      ]
+    },
+    "our-story": {
+      "type": "our-story",
+      "settings": {},
+      "blocks": {
+        "stat1": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "100%",
+            "stat_label": "3D Printed"
+          }
+        },
+        "stat2": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "Hand",
+            "stat_label": "Finished"
+          }
+        },
+        "stat3": {
+          "type": "stat",
+          "settings": {
+            "stat_value": "LED",
+            "stat_label": "Integrated"
+          }
+        }
+      },
+      "block_order": [
+        "stat1",
+        "stat2",
+        "stat3"
+      ]
+    },
+    "in-situ": {
+      "type": "in-situ",
+      "settings": {},
+      "blocks": {
+        "space1": {
+          "type": "space",
+          "settings": {
+            "room_name": "Bedroom",
+            "subtitle": "Calm ambient glow",
+            "product_name": "LumiTwist Ambient Lamp"
+          }
+        },
+        "space2": {
+          "type": "space",
+          "settings": {
+            "room_name": "Living Room",
+            "subtitle": "Shelf accent lighting",
+            "product_name": "FlameGlow Art Lamp"
+          }
+        }
+      },
+      "block_order": [
+        "space1",
+        "space2"
+      ]
+    },
+    "testimonial": {
+      "type": "testimonial",
+      "settings": {}
+    }
+  },
+  "order": [
+    "hero",
+    "featured-products",
+    "studio-values",
+    "process-steps",
+    "our-story",
+    "in-situ",
+    "testimonial"
+  ]
+}

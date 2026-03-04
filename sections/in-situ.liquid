@@ -1,0 +1,104 @@
+<!-- In Situ: Lighting in Real Spaces -->
+<section class="py-24 px-6 bg-zinc-950">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-16">
+      <p class="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4">{{ section.settings.label }}</p>
+      <h2 class="text-4xl md:text-5xl font-serif">{{ section.settings.heading }} <span class="italic text-primary">{{ section.settings.heading_highlight }}</span></h2>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.link | default: '/collections/all' }}" class="group block relative rounded-2xl overflow-hidden aspect-[4/3]" {{ block.shopify_attributes }}>
+          {% if block.settings.image %}
+            <img src="{{ block.settings.image | image_url: width: 800 }}" alt="{{ block.settings.room_name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+          {% else %}
+            {% assign idx = forloop.index0 %}
+            {% assign prod = collections['all'].products[idx] %}
+            {% if prod.featured_image %}
+              <img src="{{ prod.featured_image | image_url: width: 800 }}" alt="{{ block.settings.room_name }}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+            {% else %}
+              <div class="w-full h-full bg-white/5"></div>
+            {% endif %}
+          {% endif %}
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 p-8">
+            <h3 class="text-xl font-serif font-medium mb-1">{{ block.settings.room_name }}</h3>
+            <p class="text-sm text-muted-foreground font-light mb-2">{{ block.settings.subtitle }}</p>
+            <span class="text-primary text-sm font-light flex items-center gap-1">↗ {{ block.settings.product_name }}</span>
+          </div>
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "In Situ Gallery",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Section Label",
+      "default": "In Situ"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Lighting In Real"
+    },
+    {
+      "type": "text",
+      "id": "heading_highlight",
+      "label": "Highlighted Word (gold italic)",
+      "default": "Spaces"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "space",
+      "name": "Space Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "room_name",
+          "label": "Room Name",
+          "default": "Bedroom"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Calm ambient glow"
+        },
+        {
+          "type": "text",
+          "id": "product_name",
+          "label": "Product Name",
+          "default": "LumiTwist Ambient Lamp"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "In Situ Gallery",
+      "blocks": [
+        { "type": "space", "settings": { "room_name": "Bedroom", "subtitle": "Calm ambient glow", "product_name": "LumiTwist Ambient Lamp" } },
+        { "type": "space", "settings": { "room_name": "Living Room", "subtitle": "Shelf accent lighting", "product_name": "FlameGlow Art Lamp" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

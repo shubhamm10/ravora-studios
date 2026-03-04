@@ -1,0 +1,32 @@
+<a href="{{ product.url | within: collection }}" class="group block relative">
+  <div class="relative overflow-hidden rounded-xl bg-white/5 aspect-[4/5] mb-4">
+    {% if product.featured_image %}
+      <img 
+        src="{{ product.featured_image | image_url: width: 600 }}" 
+        alt="{{ product.title | escape }}" 
+        class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+        loading="lazy"
+      >
+    {% else %}
+      {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-50' }}
+    {% endif %}
+    
+    <!-- Hover actions -->
+    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3">
+      <div class="glass text-white hover:bg-white/10 rounded-xl px-4 py-3 md:px-5 md:py-3 text-[10px] md:text-sm tracking-widest uppercase transition-colors" onclick="event.preventDefault(); window.location.href='{{ product.url }}';">
+        Quick View
+      </div>
+      <form method="post" action="/cart/add" class="m-0 p-0" onsubmit="event.preventDefault();">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+        <button type="submit" class="bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl px-4 py-3 md:px-5 md:py-3 text-[10px] md:text-sm tracking-widest uppercase transition-colors" onclick="event.stopPropagation();">
+          Add
+        </button>
+      </form>
+    </div>
+  </div>
+  
+  <div>
+    <h3 class="text-sm font-medium mb-1 group-hover:text-primary transition-colors">{{ product.title }}</h3>
+    <p class="text-primary text-sm font-medium">{{ product.price | money }}</p>
+  </div>
+</a>

@@ -1,0 +1,75 @@
+<div class="max-w-7xl mx-auto px-6 py-20 mt-20">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+    <!-- Product Images -->
+    <div class="w-full">
+      <div class="rounded-2xl overflow-hidden bg-white/5 aspect-[4/5] relative mb-4">
+        {% if product.featured_image %}
+          <img src="{{ product.featured_image | image_url: width: 1000 }}" alt="{{ product.title | escape }}" class="w-full h-full object-cover" loading="lazy">
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-50' }}
+        {% endif %}
+      </div>
+      
+      {% if product.images.size > 1 %}
+        <div class="grid grid-cols-4 gap-4">
+          {% for image in product.images %}
+            <div class="rounded-lg overflow-hidden bg-white/5 aspect-square cursor-pointer border border-transparent hover:border-primary transition-colors">
+              <img src="{{ image | image_url: width: 250 }}" alt="{{ product.title | escape }}" class="w-full h-full object-cover" loading="lazy">
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    </div>
+    
+    <!-- Product Details -->
+    <div class="flex flex-col justify-center">
+      <nav class="text-xs text-muted-foreground mb-6 tracking-widest uppercase font-light">
+        <a href="{{ routes.root_url }}" class="hover:text-primary transition-colors">Home</a>
+        <span class="mx-2">/</span>
+        <a href="{{ routes.collections_url }}/all" class="hover:text-primary transition-colors">Products</a>
+        <span class="mx-2">/</span>
+        <span class="text-white">{{ product.title }}</span>
+      </nav>
+
+      <h1 class="text-4xl md:text-5xl font-serif mb-4 text-white">{{ product.title }}</h1>
+      <p class="text-2xl text-primary font-medium mb-8">{{ product.price | money }}</p>
+      
+      <div class="text-muted-foreground font-light text-sm md:text-base mb-10 leading-relaxed">
+        {{ product.description | default: 'Architectural 3D printed ambient lamp designed for modern interiors. Features a seamless glassmorphism effect and sculptural form.' }}
+      </div>
+      
+      <form method="post" action="/cart/add" class="mt-auto border-t border-white/10 pt-8">
+        <input type="hidden" name="id" value="{{ product.variants.first.id }}" />
+        
+        <div class="flex flex-col sm:flex-row gap-4">
+          <div class="flex items-center justify-between border border-white/10 rounded-xl px-4 py-2 bg-white/5 w-full sm:w-32">
+            <button type="button" onclick="this.nextElementSibling.stepDown()" class="text-white hover:text-primary text-xl px-2">&minus;</button>
+            <input type="number" name="quantity" value="1" min="1" class="w-10 bg-transparent text-white text-center focus:outline-none font-medium appearance-none">
+            <button type="button" onclick="this.previousElementSibling.stepUp()" class="text-white hover:text-primary text-xl px-2">&plus;</button>
+          </div>
+          <button type="submit" class="flex-grow bg-primary text-primary-foreground px-8 py-4 rounded-xl font-medium tracking-widest uppercase text-sm hover:bg-primary/90 transition-all hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(234,179,8,0.3)]">
+            Add to Cart
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<style>
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+</style>
+
+{% schema %}
+{
+  "name": "Product Details",
+  "settings": []
+}
+{% endschema %}

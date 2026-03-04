@@ -1,0 +1,38 @@
+<!-- Cart Drawer Overlay -->
+<div id="CartDrawerOverlay" class="fixed inset-0 bg-black/60 z-[60] opacity-0 pointer-events-none transition-opacity duration-300" onclick="closeCartDrawer()"></div>
+
+<!-- Cart Drawer Panel -->
+<div id="CartDrawer" class="fixed top-0 right-0 h-full w-full max-w-md bg-[#0a0a0a] border-l border-white/10 z-[70] transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+  
+  <!-- Header -->
+  <div class="flex items-center justify-between px-6 py-5 border-b border-white/10">
+    <h2 class="text-lg font-serif tracking-wide">Your Cart</h2>
+    <button onclick="closeCartDrawer()" class="text-muted-foreground hover:text-white transition-colors p-1">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </div>
+
+  <!-- Cart Body -->
+  <div id="CartDrawerBody" class="flex-grow overflow-y-auto px-6 py-8">
+    <!-- Empty state -->
+    <div id="CartEmpty" class="flex flex-col items-center justify-center h-full text-center">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="text-muted-foreground mb-4"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+      <p class="text-muted-foreground text-sm font-light">Your cart is empty</p>
+      <a href="/collections/all" onclick="closeCartDrawer()" class="mt-6 text-primary hover:text-primary/80 text-sm tracking-widest uppercase font-light transition-colors">Continue Shopping</a>
+    </div>
+
+    <!-- Cart items container -->
+    <div id="CartItems" class="hidden space-y-6"></div>
+  </div>
+
+  <!-- Cart Footer -->
+  <div id="CartFooter" class="hidden border-t border-white/10 px-6 py-6">
+    <div class="flex items-center justify-between mb-6">
+      <span class="text-sm text-muted-foreground font-light tracking-widest uppercase">Subtotal</span>
+      <span id="CartSubtotal" class="text-lg font-medium text-primary"></span>
+    </div>
+    <a href="/checkout" class="block w-full bg-primary text-primary-foreground text-center px-8 py-4 rounded-xl font-medium tracking-widest uppercase text-sm hover:bg-primary/90 transition-all hover:-translate-y-0.5">
+      Checkout
+    </a>
+  </div>
+</div>
