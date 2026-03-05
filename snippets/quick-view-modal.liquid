@@ -1,0 +1,256 @@
+<!-- Quick View Modal -->
+<div id="QuickViewOverlay" class="quickview-overlay" onclick="closeQuickView()"></div>
+<div id="QuickViewModal" class="quickview-modal" role="dialog" aria-modal="true" aria-label="Quick view">
+  <button class="quickview-close" onclick="closeQuickView()" aria-label="Close">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 6L6 18M6 6l12 12"/></svg>
+  </button>
+
+  <div id="QuickViewContent" class="quickview-content">
+    <!-- Populated by JS -->
+  </div>
+</div>
+
+<style>
+  .quickview-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 9998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  .quickview-overlay.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .quickview-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.95);
+    z-index: 9999;
+    width: 90vw;
+    max-width: 900px;
+    max-height: 85vh;
+    overflow-y: auto;
+    background: #0a0a0a;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 1.25rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+  .quickview-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .quickview-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s, background 0.3s;
+  }
+  .quickview-close:hover {
+    border-color: var(--color-primary, #eab308);
+    background: rgba(234,179,8,0.1);
+    color: var(--color-primary, #eab308);
+  }
+  .quickview-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    min-height: 400px;
+  }
+  @media (max-width: 640px) {
+    .quickview-content {
+      grid-template-columns: 1fr;
+    }
+    .quickview-modal {
+      max-height: 90vh;
+      width: 95vw;
+    }
+  }
+  .quickview-image {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1.25rem 0 0 1.25rem;
+    background: rgba(255,255,255,0.03);
+  }
+  @media (max-width: 640px) {
+    .quickview-image {
+      border-radius: 1.25rem 1.25rem 0 0;
+      aspect-ratio: 1;
+    }
+  }
+  .quickview-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .quickview-details {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .quickview-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: #fff;
+  }
+  .quickview-price {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-primary, #eab308);
+    margin-bottom: 1.25rem;
+    text-shadow: 0 0 12px rgba(234,179,8,0.3);
+  }
+  .quickview-desc {
+    font-size: 0.875rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  .quickview-actions {
+    display: flex;
+    gap: 0.75rem;
+  }
+  .quickview-actions form {
+    flex: 1;
+  }
+  .quickview-btn-cart {
+    width: 100%;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.75rem;
+    background: var(--color-primary, #eab308);
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+  }
+  .quickview-btn-cart:hover {
+    background: rgba(234,179,8,0.9);
+    transform: translateY(-1px);
+  }
+  .quickview-btn-view {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1.5rem;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 0.75rem;
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: border-color 0.3s, background 0.3s;
+    white-space: nowrap;
+  }
+  .quickview-btn-view:hover {
+    border-color: var(--color-primary, #eab308);
+    background: rgba(234,179,8,0.06);
+    color: var(--color-primary, #eab308);
+  }
+  .quickview-loader {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.875rem;
+    letter-spacing: 0.1em;
+  }
+  /* Scrollbar styling */
+  .quickview-modal::-webkit-scrollbar { width: 4px; }
+  .quickview-modal::-webkit-scrollbar-track { background: transparent; }
+  .quickview-modal::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+</style>
+
+<script>
+  function openQuickView(handle) {
+    var overlay = document.getElementById('QuickViewOverlay');
+    var modal = document.getElementById('QuickViewModal');
+    var content = document.getElementById('QuickViewContent');
+    if (!overlay || !modal || !content) return;
+
+    content.innerHTML = '<div class="quickview-loader">Loading…</div>';
+    overlay.classList.add('is-open');
+    modal.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
+
+    fetch('/products/' + handle + '.js')
+      .then(function(res) { return res.json(); })
+      .then(function(product) {
+        var imgSrc = product.featured_image
+          ? product.featured_image.replace(/(\.[a-z]+)\?/, '_800x$1?')
+          : '';
+        var price = '₹' + (product.price / 100).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        var desc = product.description
+          ? product.description.replace(/<[^>]*>/g, '').substring(0, 300)
+          : 'Architectural 3D printed ambient lamp designed for modern interiors.';
+        var variantId = product.variants && product.variants[0] ? product.variants[0].id : '';
+
+        content.innerHTML =
+          '<div class="quickview-image">' +
+            (imgSrc ? '<img src="' + imgSrc + '" alt="' + product.title + '">' : '<div style="width:100%;height:100%;background:rgba(255,255,255,0.03)"></div>') +
+          '</div>' +
+          '<div class="quickview-details">' +
+            '<h2 class="quickview-title">' + product.title + '</h2>' +
+            '<p class="quickview-price">' + price + '</p>' +
+            '<div class="quickview-desc">' + desc + '</div>' +
+            '<div class="quickview-actions">' +
+              '<form method="post" action="/cart/add">' +
+                '<input type="hidden" name="id" value="' + variantId + '">' +
+                '<button type="submit" class="quickview-btn-cart">Add to Cart</button>' +
+              '</form>' +
+              '<a href="/products/' + handle + '" class="quickview-btn-view">Full Details</a>' +
+            '</div>' +
+          '</div>';
+      })
+      .catch(function() {
+        content.innerHTML = '<div class="quickview-loader">Failed to load product.</div>';
+      });
+  }
+
+  function closeQuickView() {
+    var overlay = document.getElementById('QuickViewOverlay');
+    var modal = document.getElementById('QuickViewModal');
+    if (overlay) overlay.classList.remove('is-open');
+    if (modal) modal.classList.remove('is-open');
+    document.body.style.overflow = '';
+  }
+
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeQuickView();
+  });
+</script>
