@@ -1,6 +1,8 @@
 <!-- FAQ / Accordion Section -->
-<section class="py-24 px-6">
-  <div class="max-w-3xl mx-auto">
+<section class="py-24 px-6 relative overflow-hidden">
+  <!-- Gold ambient glow -->
+  <div class="absolute top-[10%] left-1/2 -translate-x-1/2 w-[500px] h-[450px] pointer-events-none" style="background: radial-gradient(circle, rgba(234,179,8,0.05) 0%, rgba(234,179,8,0.015) 45%, transparent 70%);"></div>
+  <div class="max-w-3xl mx-auto relative z-10">
     <div class="text-center mb-16 reveal">
       <p class="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4">{{ section.settings.label }}</p>
       <h2 class="text-4xl md:text-5xl font-serif">{{ section.settings.heading }} <span class="italic text-primary">{{ section.settings.heading_highlight }}</span></h2>
