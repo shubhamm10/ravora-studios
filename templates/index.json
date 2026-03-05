@@ -200,6 +200,72 @@
         "author": "Interior Design Enthusiast",
         "author_title": "Verified Customer"
       }
+    },
+    "faq": {
+      "type": "faq",
+      "blocks": {
+        "faq1": {
+          "type": "faq",
+          "settings": {
+            "question": "How are the lamps made?",
+            "answer": "<p>Each lamp is 3D printed layer by layer using advanced FDM technology over 12–24 hours, then hand-finished to ensure flawless quality. LED lighting is carefully integrated during final assembly.</p>"
+          }
+        },
+        "faq2": {
+          "type": "faq",
+          "settings": {
+            "question": "What materials do you use?",
+            "answer": "<p>We use plant-based bioplastics (PLA) and recycled bio-polymers. These materials are sustainable, durable, and produce a beautiful diffused light effect.</p>"
+          }
+        },
+        "faq3": {
+          "type": "faq",
+          "settings": {
+            "question": "How long does shipping take?",
+            "answer": "<p>Orders are typically dispatched within 3–5 business days. Since each piece is made on-demand, please allow up to 7–10 business days for delivery.</p>"
+          }
+        },
+        "faq4": {
+          "type": "faq",
+          "settings": {
+            "question": "Can I customize a lamp?",
+            "answer": "<p>Yes! We accept custom orders for color, size, and design modifications. Reach out to us at hello@ravora.studio for custom inquiries.</p>"
+          }
+        },
+        "faq5": {
+          "type": "faq",
+          "settings": {
+            "question": "Do you offer returns?",
+            "answer": "<p>We offer a 14-day return policy for undamaged products in original packaging. Custom orders are non-returnable.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq1",
+        "faq2",
+        "faq3",
+        "faq4",
+        "faq5"
+      ],
+      "settings": {
+        "label": "FAQ",
+        "heading": "Common",
+        "heading_highlight": "Questions"
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "label": "Stay Connected",
+        "heading": "Join the",
+        "heading_highlight": "Studio",
+        "description": "Be the first to know about new designs, studio updates, and exclusive early access to limited-edition drops.",
+        "placeholder": "Enter your email",
+        "button_text": "Subscribe",
+        "success_message": "Welcome to the studio. You're in.",
+        "show_privacy_note": true,
+        "privacy_note": "No spam, ever. Unsubscribe anytime."
+      }
     }
   },
   "order": [
@@ -209,6 +275,8 @@
     "process-steps",
     "our-story",
     "in-situ",
-    "testimonial"
+    "testimonial",
+    "faq",
+    "newsletter"
   ]
 }

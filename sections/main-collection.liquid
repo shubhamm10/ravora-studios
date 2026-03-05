@@ -1,8 +1,8 @@
 <div class="max-w-7xl mx-auto px-6 py-12 pb-32 mt-20">
   <h1 class="text-4xl md:text-5xl font-serif text-center mb-12">{{ collection.title | default: 'Shop' }}</h1>
   
-  <!-- Tab Filters (Client-side, not page navigation) -->
-  <div class="w-full flex justify-center mb-12">
+  <!-- Tab Filters + Sort -->
+  <div class="w-full flex flex-col sm:flex-row items-center justify-between gap-4 mb-12 reveal">
     <div class="flex flex-wrap items-center justify-center gap-3">
       <button data-filter-tab="all" onclick="filterProducts('all', this)" class="px-6 py-2.5 rounded-lg text-sm font-light tracking-widest uppercase transition-all duration-300 whitespace-nowrap bg-primary text-primary-foreground">
         All
@@ -13,6 +13,18 @@
       <button data-filter-tab="planter" onclick="filterProducts('planter', this)" class="px-6 py-2.5 rounded-lg text-sm font-light tracking-widest uppercase transition-all duration-300 whitespace-nowrap text-muted-foreground glass hover:text-white">
         Planters
       </button>
+    </div>
+    <div class="flex items-center gap-4">
+      <span class="text-xs text-muted-foreground tracking-widest uppercase">{{ collection.products_count }} products</span>
+      <div class="relative">
+        <select onchange="window.location.href = this.value" class="appearance-none bg-white/5 border border-white/10 rounded-lg px-4 py-2.5 pr-8 text-sm text-white font-light tracking-wide cursor-pointer focus:outline-none focus:border-primary/40 transition-colors" style="background-image: url('data:image/svg+xml,%3Csvg width%3D%2210%22 height%3D%226%22 viewBox%3D%220 0 10 6%22 fill%3D%22none%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath d%3D%22M1 1l4 4 4-4%22 stroke%3D%22%23a1a1aa%22 stroke-width%3D%221.5%22%2F%3E%3C%2Fsvg%3E'); background-repeat: no-repeat; background-position: right 0.75rem center;">
+          <option value="{{ collection.url }}?sort_by=manual" {% if collection.sort_by == 'manual' or collection.sort_by == blank %}selected{% endif %}>Featured</option>
+          <option value="{{ collection.url }}?sort_by=price-ascending" {% if collection.sort_by == 'price-ascending' %}selected{% endif %}>Price: Low → High</option>
+          <option value="{{ collection.url }}?sort_by=price-descending" {% if collection.sort_by == 'price-descending' %}selected{% endif %}>Price: High → Low</option>
+          <option value="{{ collection.url }}?sort_by=created-descending" {% if collection.sort_by == 'created-descending' %}selected{% endif %}>Newest</option>
+          <option value="{{ collection.url }}?sort_by=title-ascending" {% if collection.sort_by == 'title-ascending' %}selected{% endif %}>A – Z</option>
+        </select>
+      </div>
     </div>
   </div>
 

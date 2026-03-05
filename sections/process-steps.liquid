@@ -1,12 +1,12 @@
 <!-- How It's Made Process Section -->
 <section class="py-24 px-6 bg-zinc-950">
   <div class="max-w-7xl mx-auto">
-    <div class="text-center mb-16">
+    <div class="text-center mb-16 reveal">
       <p class="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4">{{ section.settings.label }}</p>
       <h2 class="text-4xl md:text-5xl font-serif">{{ section.settings.heading }} <span class="italic text-primary">{{ section.settings.heading_highlight }}</span></h2>
     </div>
     
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 reveal-stagger">
       {% for block in section.blocks %}
         <div class="border border-white/10 rounded-2xl p-8 relative overflow-hidden group hover:border-primary/30 transition-colors" {{ block.shopify_attributes }}>
           <span class="absolute top-4 right-6 text-6xl font-serif text-white/5 font-bold">{{ block.settings.step_number }}</span>

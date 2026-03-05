@@ -1,21 +1,60 @@
 <!-- Our Story Section -->
 <section class="py-24 px-6">
   <div class="max-w-4xl mx-auto text-center">
-    <h2 class="text-4xl md:text-5xl font-serif mb-8">{{ section.settings.heading }} <span class="italic text-primary">{{ section.settings.heading_highlight }}</span></h2>
-    <p class="text-muted-foreground font-light leading-relaxed text-base md:text-lg mb-16">
+    <h2 class="text-4xl md:text-5xl font-serif mb-8 reveal">{{ section.settings.heading }} <span class="italic text-primary">{{ section.settings.heading_highlight }}</span></h2>
+    <p class="text-muted-foreground font-light leading-relaxed text-base md:text-lg mb-16 reveal">
       {{ section.settings.description }}
     </p>
     
-    <div class="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-20">
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-12 sm:gap-20 reveal-stagger">
       {% for block in section.blocks %}
         <div class="text-center" {{ block.shopify_attributes }}>
-          <p class="text-3xl md:text-4xl font-serif text-primary mb-2">{{ block.settings.stat_value }}</p>
+          <p class="text-3xl md:text-4xl font-serif text-primary mb-2" data-counter="{{ block.settings.stat_value }}">{{ block.settings.stat_value }}</p>
           <p class="text-xs tracking-[0.2em] uppercase text-muted-foreground font-light">{{ block.settings.stat_label }}</p>
         </div>
       {% endfor %}
     </div>
   </div>
 </section>
+
+<script>
+  (function() {
+    var counters = document.querySelectorAll('[data-counter]');
+    if (counters.length === 0 || !('IntersectionObserver' in window)) return;
+
+    var counterObserver = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        var raw = el.getAttribute('data-counter');
+        counterObserver.unobserve(el);
+
+        /* Extract numeric portion */
+        var match = raw.match(/^(\d+)/);
+        if (!match) return; /* Non-numeric like "Hand", "LED" — skip */
+
+        var target = parseInt(match[1], 10);
+        var suffix = raw.replace(match[1], '');
+        var duration = 1800;
+        var start = performance.now();
+
+        function tick(now) {
+          var elapsed = now - start;
+          var progress = Math.min(elapsed / duration, 1);
+          /* Ease out cubic */
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var current = Math.round(target * eased);
+          el.textContent = current + suffix;
+          if (progress < 1) requestAnimationFrame(tick);
+        }
+        el.textContent = '0' + suffix;
+        requestAnimationFrame(tick);
+      });
+    }, { threshold: 0.5 });
+
+    counters.forEach(function(el) { counterObserver.observe(el); });
+  })();
+</script>
 
 {% schema %}
 {

@@ -72,5 +72,59 @@
     {% section 'footer' %}
 
     {% render 'cart-drawer' %}
+
+    <!-- Back to Top Button -->
+    <button id="BackToTop" class="back-to-top" aria-label="Back to top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+
+    <style>
+      .back-to-top {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        z-index: 999;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid rgba(234,179,8,0.3);
+        background: rgba(0,0,0,0.7);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        color: var(--color-primary, #eab308);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        transition: opacity 0.3s ease, transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+      }
+      .back-to-top.is-shown {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+      .back-to-top:hover {
+        background: var(--color-primary, #eab308);
+        color: #000;
+        border-color: var(--color-primary, #eab308);
+      }
+    </style>
+
+    <script>
+      (function() {
+        var btn = document.getElementById('BackToTop');
+        if (!btn) return;
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 500) {
+            btn.classList.add('is-shown');
+          } else {
+            btn.classList.remove('is-shown');
+          }
+        }, { passive: true });
+      })();
+    </script>
   </body>
 </html>

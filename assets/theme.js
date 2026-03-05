@@ -2,6 +2,23 @@ document.addEventListener('DOMContentLoaded', () => {
   // ─── Cart Drawer ───────────────────────────────────────────
   refreshCartDrawer();
 
+  // ─── Scroll Reveal (IntersectionObserver) ─────────────────
+  const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+  if (revealEls.length > 0 && 'IntersectionObserver' in window) {
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => revealObserver.observe(el));
+  } else {
+    // Fallback: show everything immediately
+    revealEls.forEach(el => el.classList.add('is-visible'));
+  }
+
   // Intercept all add-to-cart forms
   document.addEventListener('submit', async (e) => {
     const form = e.target.closest('form[action="/cart/add"]');
