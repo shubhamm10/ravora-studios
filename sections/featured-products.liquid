@@ -20,7 +20,7 @@
             <div class="absolute bottom-0 left-0 right-0 p-5">
               <h3 class="text-lg font-serif font-medium mb-1">{{ product.title }}</h3>
               <p class="text-xs text-muted-foreground font-light mb-2">{{ product.description | strip_html | truncate: 60 }}</p>
-              <p class="text-primary font-medium">{{ product.price | money }}</p>
+              <p class="text-xl text-primary font-bold" style="text-shadow: 0 0 12px rgba(234,179,8,0.4);">{{ product.price | money }}</p>
             </div>
           </a>
         {% endfor %}
@@ -30,7 +30,7 @@
             <div>
               <h3 class="text-lg font-serif font-medium mb-1">Sample Lamp {{ i }}</h3>
               <p class="text-xs text-muted-foreground font-light mb-2">Modern ambient lighting</p>
-              <p class="text-primary font-medium">₹2,499</p>
+              <p class="text-xl text-primary font-bold" style="text-shadow: 0 0 12px rgba(234,179,8,0.4);">₹2,499</p>
             </div>
           </div>
         {% endfor %}

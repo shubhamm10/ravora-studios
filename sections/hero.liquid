@@ -17,44 +17,57 @@
   </div>
   
   <!-- Auto-scrolling product marquee carousel -->
-  <div class="w-full overflow-hidden relative z-10 mt-8">
-    <div class="flex gap-5 animate-product-marquee whitespace-nowrap">
+  <div class="hero-marquee-viewport" id="heroMarquee-{{ section.id }}">
+    <div class="hero-marquee-track">
       {% assign marquee_collection = section.settings.marquee_collection | default: 'all' %}
       {% assign product_collection = collections[marquee_collection] %}
       {% if product_collection.products.size > 0 %}
         {% for product in product_collection.products %}
-          <a href="{{ product.url }}" class="inline-block flex-shrink-0 w-[260px] group">
-            <div class="rounded-2xl overflow-hidden aspect-[3/4] bg-white/5 mb-3">
+          <a href="{{ product.url }}" class="hero-marquee-card group" draggable="false">
+            <div class="hero-marquee-card__image">
               {% if product.featured_image %}
-                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" draggable="false">
               {% else %}
                 {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-30' }}
               {% endif %}
             </div>
-            <p class="text-sm font-medium truncate">{{ product.title }}</p>
-            <p class="text-primary text-sm font-medium">{{ product.price | money }}</p>
+            <p class="hero-marquee-card__title">{{ product.title }}</p>
+            <p class="hero-marquee-card__price">{{ product.price | money }}</p>
           </a>
         {% endfor %}
-        <!-- Duplicate for seamless loop -->
+        <!-- Duplicate sets for seamless infinite loop -->
         {% for product in product_collection.products %}
-          <a href="{{ product.url }}" class="inline-block flex-shrink-0 w-[260px] group">
-            <div class="rounded-2xl overflow-hidden aspect-[3/4] bg-white/5 mb-3">
+          <a href="{{ product.url }}" class="hero-marquee-card group" draggable="false">
+            <div class="hero-marquee-card__image">
               {% if product.featured_image %}
-                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy">
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" draggable="false">
               {% else %}
                 {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-30' }}
               {% endif %}
             </div>
-            <p class="text-sm font-medium truncate">{{ product.title }}</p>
-            <p class="text-primary text-sm font-medium">{{ product.price | money }}</p>
+            <p class="hero-marquee-card__title">{{ product.title }}</p>
+            <p class="hero-marquee-card__price">{{ product.price | money }}</p>
+          </a>
+        {% endfor %}
+        {% for product in product_collection.products %}
+          <a href="{{ product.url }}" class="hero-marquee-card group" draggable="false">
+            <div class="hero-marquee-card__image">
+              {% if product.featured_image %}
+                <img src="{{ product.featured_image | image_url: width: 400 }}" alt="{{ product.title | escape }}" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" loading="lazy" draggable="false">
+              {% else %}
+                {{ 'product-1' | placeholder_svg_tag: 'w-full h-full object-cover opacity-30' }}
+              {% endif %}
+            </div>
+            <p class="hero-marquee-card__title">{{ product.title }}</p>
+            <p class="hero-marquee-card__price">{{ product.price | money }}</p>
           </a>
         {% endfor %}
       {% else %}
-        {% for i in (1..8) %}
-          <div class="inline-block flex-shrink-0 w-[260px]">
-            <div class="rounded-2xl overflow-hidden aspect-[3/4] bg-white/5 mb-3"></div>
-            <p class="text-sm font-medium">Sample Lamp</p>
-            <p class="text-primary text-sm font-medium">₹2,499</p>
+        {% for i in (1..12) %}
+          <div class="hero-marquee-card">
+            <div class="hero-marquee-card__image"></div>
+            <p class="hero-marquee-card__title">Sample Lamp</p>
+            <p class="hero-marquee-card__price">₹2,499</p>
           </div>
         {% endfor %}
       {% endif %}
@@ -68,17 +81,112 @@
 </section>
 
 <style>
-@keyframes product-marquee {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
-}
-.animate-product-marquee {
-  animation: product-marquee {{ section.settings.marquee_speed }}s linear infinite;
-}
-.animate-product-marquee:hover {
-  animation-play-state: paused;
-}
+  .hero-marquee-viewport {
+    width: 100vw;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
+    margin-top: 2rem;
+    margin-left: calc(-50vw + 50%);
+  }
+  .hero-marquee-track {
+    display: flex;
+    gap: 0;
+    will-change: transform;
+  }
+  .hero-marquee-card {
+    flex-shrink: 0;
+    width: calc(100vw / 5);
+    padding: 0 8px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    -webkit-user-drag: none;
+  }
+  @media (max-width: 1024px) {
+    .hero-marquee-card { width: calc(100vw / 3); }
+  }
+  @media (max-width: 640px) {
+    .hero-marquee-card { width: calc(100vw / 2); }
+  }
+  .hero-marquee-card__image {
+    border-radius: 1rem;
+    overflow: hidden;
+    aspect-ratio: 3/4;
+    background: rgba(255,255,255,0.05);
+    margin-bottom: 0.75rem;
+  }
+  .hero-marquee-card__title {
+    font-size: 0.875rem;
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 0 2px;
+  }
+  .hero-marquee-card__price {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-primary, #eab308);
+    letter-spacing: 0.02em;
+    padding: 0 2px;
+  }
 </style>
+
+<script>
+  (function() {
+    var sectionId = '{{ section.id }}';
+    var speed = {{ section.settings.marquee_speed | default: 30 }};
+    /* Convert speed setting to pixels per second — lower setting = faster */
+    var pxPerSec = 1800 / speed;
+    var viewport = document.getElementById('heroMarquee-' + sectionId);
+    if (!viewport) return;
+    var track = viewport.querySelector('.hero-marquee-track');
+    if (!track) return;
+
+    var cards = track.querySelectorAll('.hero-marquee-card');
+    if (cards.length === 0) return;
+
+    /* Calculate the width of one "set" of original products */
+    var totalCards = cards.length;
+    var oneSetCount = Math.round(totalCards / 3);
+    var paused = false;
+    var offset = 0;
+    var lastTime = null;
+
+    function getOneSetWidth() {
+      var w = 0;
+      for (var i = 0; i < oneSetCount && i < cards.length; i++) {
+        w += cards[i].offsetWidth;
+      }
+      return w;
+    }
+
+    function animate(now) {
+      if (!lastTime) lastTime = now;
+      var dt = (now - lastTime) / 1000;
+      lastTime = now;
+
+      if (!paused) {
+        offset += pxPerSec * dt;
+        var oneSetW = getOneSetWidth();
+        if (oneSetW > 0 && offset >= oneSetW) {
+          offset -= oneSetW;
+        }
+        track.style.transform = 'translateX(' + (-offset) + 'px)';
+      }
+      requestAnimationFrame(animate);
+    }
+
+    viewport.addEventListener('mouseenter', function() { paused = true; });
+    viewport.addEventListener('mouseleave', function() { paused = false; lastTime = null; });
+    viewport.addEventListener('touchstart', function() { paused = true; }, { passive: true });
+    viewport.addEventListener('touchend', function() { paused = false; lastTime = null; });
+
+    requestAnimationFrame(animate);
+  })();
+</script>
 
 {% schema %}
 {

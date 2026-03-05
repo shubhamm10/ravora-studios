@@ -32,7 +32,7 @@
       </nav>
 
       <h1 class="text-4xl md:text-5xl font-serif mb-4 text-white">{{ product.title }}</h1>
-      <p class="text-2xl text-primary font-medium mb-8">{{ product.price | money }}</p>
+      <p class="text-3xl text-primary font-bold mb-8" style="text-shadow: 0 0 12px rgba(234,179,8,0.4);">{{ product.price | money }}</p>
       
       <div class="text-muted-foreground font-light text-sm md:text-base mb-10 leading-relaxed">
         {{ product.description | default: 'Architectural 3D printed ambient lamp designed for modern interiors. Features a seamless glassmorphism effect and sculptural form.' }}
