@@ -32,6 +32,78 @@
         "collection": "lamps"
       }
     },
+    "testimonial": {
+      "type": "testimonial",
+      "blocks": {
+        "review1": {
+          "type": "review",
+          "settings": {
+            "name": "Anika Sharma",
+            "title": "Mumbai · Verified Buyer",
+            "quote": "The craftsmanship is unreal. Every guest who visits asks about my Ravora lamp — it's become the centerpiece of the living room.",
+            "stars": 5
+          }
+        },
+        "review2": {
+          "type": "review",
+          "settings": {
+            "name": "Rohan Kapoor",
+            "title": "Delhi · Verified Buyer",
+            "quote": "I've never seen lighting like this. The way light filters through the 3D printed layers creates the most beautiful ambient glow.",
+            "stars": 5
+          }
+        },
+        "review3": {
+          "type": "review",
+          "settings": {
+            "name": "Priya Menon",
+            "title": "Bangalore · Verified Buyer",
+            "quote": "Worth every rupee. The design is minimal yet striking, and the quality of light genuinely changes the mood of the space.",
+            "stars": 5
+          }
+        },
+        "gallery1": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/d98a403a24829e0f.jpg"
+          }
+        },
+        "gallery2": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/303f61e0-c56e-11f0-9d0c-a3d9be89bca0.jpg"
+          }
+        },
+        "gallery3": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/0b5ceea0-94fa-11f0-b059-7de4eebe3882.jpg"
+          }
+        },
+        "gallery4": {
+          "type": "gallery_image",
+          "settings": {
+            "image": "shopify://shop_images/WhatsApp_Image_2026-01-31_at_18.31.42.jpg"
+          }
+        }
+      },
+      "block_order": [
+        "review1",
+        "review2",
+        "review3",
+        "gallery1",
+        "gallery2",
+        "gallery3",
+        "gallery4"
+      ],
+      "settings": {
+        "label": "What People Say",
+        "heading": "Loved by",
+        "heading_highlight": "Our Customers",
+        "gallery_label": "In the Wild",
+        "marquee_speed": 25
+      }
+    },
     "studio-values": {
       "type": "studio-values",
       "blocks": {
@@ -186,74 +258,11 @@
         "space1",
         "space2"
       ],
+      "disabled": true,
       "settings": {
         "label": "In Situ",
         "heading": "Lighting In Real",
         "heading_highlight": "Spaces"
-      }
-    },
-    "testimonial": {
-      "type": "testimonial",
-      "blocks": {
-        "review1": {
-          "type": "review",
-          "settings": {
-            "name": "Anika Sharma",
-            "title": "Mumbai · Verified Buyer",
-            "quote": "The craftsmanship is unreal. Every guest who visits asks about my Ravora lamp — it's become the centerpiece of the living room.",
-            "stars": 5
-          }
-        },
-        "review2": {
-          "type": "review",
-          "settings": {
-            "name": "Rohan Kapoor",
-            "title": "Delhi · Verified Buyer",
-            "quote": "I've never seen lighting like this. The way light filters through the 3D printed layers creates the most beautiful ambient glow.",
-            "stars": 5
-          }
-        },
-        "review3": {
-          "type": "review",
-          "settings": {
-            "name": "Priya Menon",
-            "title": "Bangalore · Verified Buyer",
-            "quote": "Worth every rupee. The design is minimal yet striking, and the quality of light genuinely changes the mood of the space.",
-            "stars": 5
-          }
-        },
-        "gallery1": {
-          "type": "gallery_image",
-          "settings": {}
-        },
-        "gallery2": {
-          "type": "gallery_image",
-          "settings": {}
-        },
-        "gallery3": {
-          "type": "gallery_image",
-          "settings": {}
-        },
-        "gallery4": {
-          "type": "gallery_image",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "review1",
-        "review2",
-        "review3",
-        "gallery1",
-        "gallery2",
-        "gallery3",
-        "gallery4"
-      ],
-      "settings": {
-        "label": "What People Say",
-        "heading": "Loved by",
-        "heading_highlight": "Our Customers",
-        "gallery_label": "In the Wild",
-        "marquee_speed": 25
       }
     },
     "faq": {
@@ -326,11 +335,11 @@
   "order": [
     "hero",
     "featured-products",
+    "testimonial",
     "studio-values",
     "process-steps",
     "our-story",
     "in-situ",
-    "testimonial",
     "faq",
     "newsletter"
   ]
