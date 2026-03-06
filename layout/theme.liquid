@@ -35,8 +35,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
     
-    <!-- Tailwind CSS for rapid exact replication -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS with Typography plugin for elegant policy layouts -->
+    <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -65,7 +65,7 @@
   <body class="bg-black text-white font-sans antialiased flex flex-col min-h-screen">
     {% section 'header' %}
 
-    <main id="MainContent" class="flex-grow focus:outline-none" role="main" tabindex="-1">
+    <main id="MainContent" class="flex-grow focus:outline-none {% if request.page_type == 'policy' %}pt-36 pb-24 px-6 max-w-4xl mx-auto w-full prose prose-invert prose-p:text-muted-foreground prose-headings:font-serif prose-headings:font-normal prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary/80 prose-hr:border-white/10 prose-li:text-muted-foreground marker:text-primary{% endif %}" role="main" tabindex="-1">
       {{ content_for_layout }}
     </main>
 
