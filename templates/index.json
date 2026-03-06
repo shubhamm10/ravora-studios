@@ -186,6 +186,7 @@
         "space1",
         "space2"
       ],
+      "disabled": true,
       "settings": {
         "label": "In Situ",
         "heading": "Lighting In Real",
@@ -336,9 +337,9 @@
     "featured-products",
     "studio-values",
     "process-steps",
-    "our-story",
     "in-situ",
     "testimonial",
+    "our-story",
     "faq",
     "newsletter"
   ]
