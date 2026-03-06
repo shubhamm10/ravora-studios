@@ -194,11 +194,66 @@
     },
     "testimonial": {
       "type": "testimonial",
+      "blocks": {
+        "review1": {
+          "type": "review",
+          "settings": {
+            "name": "Anika Sharma",
+            "title": "Mumbai · Verified Buyer",
+            "quote": "The craftsmanship is unreal. Every guest who visits asks about my Ravora lamp — it's become the centerpiece of the living room.",
+            "stars": 5
+          }
+        },
+        "review2": {
+          "type": "review",
+          "settings": {
+            "name": "Rohan Kapoor",
+            "title": "Delhi · Verified Buyer",
+            "quote": "I've never seen lighting like this. The way light filters through the 3D printed layers creates the most beautiful ambient glow.",
+            "stars": 5
+          }
+        },
+        "review3": {
+          "type": "review",
+          "settings": {
+            "name": "Priya Menon",
+            "title": "Bangalore · Verified Buyer",
+            "quote": "Worth every rupee. The design is minimal yet striking, and the quality of light genuinely changes the mood of the space.",
+            "stars": 5
+          }
+        },
+        "gallery1": {
+          "type": "gallery_image",
+          "settings": {}
+        },
+        "gallery2": {
+          "type": "gallery_image",
+          "settings": {}
+        },
+        "gallery3": {
+          "type": "gallery_image",
+          "settings": {}
+        },
+        "gallery4": {
+          "type": "gallery_image",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "review1",
+        "review2",
+        "review3",
+        "gallery1",
+        "gallery2",
+        "gallery3",
+        "gallery4"
+      ],
       "settings": {
         "label": "What People Say",
-        "quote": "These lamps transform a room. The quality of light, the texture, the form — it's like having a piece of sculpture that also happens to illuminate your life.",
-        "author": "Interior Design Enthusiast",
-        "author_title": "Verified Customer"
+        "heading": "Loved by",
+        "heading_highlight": "Our Customers",
+        "gallery_label": "In the Wild",
+        "marquee_speed": 25
       }
     },
     "faq": {

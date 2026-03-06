@@ -1,22 +1,114 @@
-<!-- Testimonial Section -->
+<!-- Testimonial Section: Reviews + Product Photo Marquee -->
 <section class="py-28 px-6 relative overflow-hidden">
-  <!-- Gold ambient glow -->
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[700px] pointer-events-none" style="background: radial-gradient(circle, rgba(234,179,8,0.06) 0%, rgba(234,179,8,0.02) 40%, transparent 70%);"></div>
-  <div class="max-w-4xl mx-auto text-center reveal relative z-10">
-    <p class="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-10">{{ section.settings.label }}</p>
-    <blockquote class="text-2xl md:text-3xl lg:text-[2.2rem] font-serif leading-relaxed text-white/90 mb-10">
-      "{{ section.settings.quote }}"
-    </blockquote>
-    <div>
-      <p class="text-sm font-medium text-white">{{ section.settings.author }}</p>
-      <p class="text-xs text-muted-foreground font-light mt-1">{{ section.settings.author_title }}</p>
+  <!-- Subtle ambient glow -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] pointer-events-none" style="background: radial-gradient(circle, rgba(234,179,8,0.05) 0%, rgba(234,179,8,0.02) 40%, transparent 70%);"></div>
+
+  <div class="max-w-7xl mx-auto relative z-10">
+    <!-- Section Header -->
+    <div class="text-center mb-20 reveal">
+      <p class="text-sm tracking-[0.3em] uppercase text-muted-foreground mb-4">{{ section.settings.label }}</p>
+      <h2 class="text-4xl md:text-5xl font-serif tracking-tight">
+        {{ section.settings.heading }} <em class="text-primary">{{ section.settings.heading_highlight }}</em>
+      </h2>
     </div>
+
+    <!-- Testimonial Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-24 reveal">
+      {% for block in section.blocks %}
+        {% if block.type == 'review' %}
+          <div class="group bg-white/[0.03] border border-white/[0.06] rounded-2xl p-8 hover:border-primary/20 transition-all duration-500 hover:bg-white/[0.05]" {{ block.shopify_attributes }}>
+            <!-- Stars -->
+            <div class="flex gap-1 mb-5">
+              {% assign star_count = block.settings.stars | default: 5 %}
+              {% for i in (1..5) %}
+                {% if i <= star_count %}
+                  <svg class="w-4 h-4 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                {% else %}
+                  <svg class="w-4 h-4 text-white/10" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                {% endif %}
+              {% endfor %}
+            </div>
+
+            <!-- Review Text -->
+            <blockquote class="text-sm md:text-[15px] font-light text-white/80 leading-relaxed mb-8">
+              "{{ block.settings.quote }}"
+            </blockquote>
+
+            <!-- Customer Photo + Info -->
+            <div class="flex items-center gap-4">
+              {% if block.settings.photo != blank %}
+                <div class="w-11 h-11 rounded-full overflow-hidden border border-white/10 flex-shrink-0">
+                  {{ block.settings.photo | image_url: width: 100 | image_tag: class: 'w-full h-full object-cover' }}
+                </div>
+              {% else %}
+                <div class="w-11 h-11 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center flex-shrink-0">
+                  <span class="text-primary text-sm font-serif italic">{{ block.settings.name | slice: 0 }}</span>
+                </div>
+              {% endif %}
+              <div>
+                <p class="text-sm font-medium text-white">{{ block.settings.name }}</p>
+                <p class="text-xs text-muted-foreground font-light">{{ block.settings.title }}</p>
+              </div>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+
+    <!-- Product Photo Marquee Gallery -->
+    {% assign gallery_blocks = section.blocks | where: 'type', 'gallery_image' %}
+    {% if gallery_blocks.size > 0 %}
+      <div class="reveal">
+        <p class="text-center text-xs tracking-[0.3em] uppercase text-muted-foreground mb-10">{{ section.settings.gallery_label }}</p>
+        <div class="relative overflow-hidden" style="mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);">
+          <div class="testimonial-marquee flex gap-6 w-max">
+            <!-- First set -->
+            {% for block in gallery_blocks %}
+              <div class="w-64 h-80 md:w-72 md:h-96 rounded-xl overflow-hidden flex-shrink-0 border border-white/[0.06] group" {{ block.shopify_attributes }}>
+                {% if block.settings.image != blank %}
+                  {{ block.settings.image | image_url: width: 600 | image_tag: class: 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-700' }}
+                {% else %}
+                  <div class="w-full h-full bg-white/5 flex items-center justify-center">
+                    <span class="text-muted-foreground text-xs tracking-widest uppercase">Upload Image</span>
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+            <!-- Duplicate set for infinite scroll -->
+            {% for block in gallery_blocks %}
+              <div class="w-64 h-80 md:w-72 md:h-96 rounded-xl overflow-hidden flex-shrink-0 border border-white/[0.06] group">
+                {% if block.settings.image != blank %}
+                  {{ block.settings.image | image_url: width: 600 | image_tag: class: 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-700' }}
+                {% else %}
+                  <div class="w-full h-full bg-white/5 flex items-center justify-center">
+                    <span class="text-muted-foreground text-xs tracking-widest uppercase">Upload Image</span>
+                  </div>
+                {% endif %}
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    {% endif %}
   </div>
 </section>
 
+<style>
+  .testimonial-marquee {
+    animation: testimonial-scroll {{ section.settings.marquee_speed }}s linear infinite;
+  }
+  .testimonial-marquee:hover {
+    animation-play-state: paused;
+  }
+  @keyframes testimonial-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>
+
 {% schema %}
 {
-  "name": "Testimonial",
+  "name": "Testimonials & Gallery",
   "settings": [
     {
       "type": "text",
@@ -25,24 +117,118 @@
       "default": "What People Say"
     },
     {
-      "type": "textarea",
-      "id": "quote",
-      "label": "Quote Text",
-      "default": "These lamps transform a room. The quality of light, the texture, the form — it's like having a piece of sculpture that also happens to illuminate your life."
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Loved by"
     },
     {
       "type": "text",
-      "id": "author",
-      "label": "Author Name",
-      "default": "Interior Design Enthusiast"
+      "id": "heading_highlight",
+      "label": "Heading Highlight",
+      "default": "Our Customers"
     },
     {
       "type": "text",
-      "id": "author_title",
-      "label": "Author Title",
-      "default": "Verified Customer"
+      "id": "gallery_label",
+      "label": "Gallery Label",
+      "default": "In the Wild"
+    },
+    {
+      "type": "range",
+      "id": "marquee_speed",
+      "min": 10,
+      "max": 60,
+      "step": 5,
+      "default": 25,
+      "unit": "s",
+      "label": "Gallery scroll speed"
     }
   ],
-  "presets": [{ "name": "Testimonial" }]
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Review",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "photo",
+          "label": "Customer Photo"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Customer Name",
+          "default": "Customer"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title / Location",
+          "default": "Verified Buyer"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Review Text",
+          "default": "This lamp is absolutely stunning. The light quality is warm and the design is a conversation starter."
+        },
+        {
+          "type": "range",
+          "id": "stars",
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5,
+          "label": "Star Rating"
+        }
+      ]
+    },
+    {
+      "type": "gallery_image",
+      "name": "Gallery Photo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Photo"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Testimonials & Gallery",
+      "blocks": [
+        {
+          "type": "review",
+          "settings": {
+            "name": "Anika Sharma",
+            "title": "Mumbai · Verified Buyer",
+            "quote": "The craftsmanship is unreal. Every guest who visits asks about my Ravora lamp — it's become the centerpiece of the living room.",
+            "stars": 5
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Rohan Kapoor",
+            "title": "Delhi · Verified Buyer",
+            "quote": "I've never seen lighting like this. The way light filters through the 3D printed layers creates the most beautiful ambient glow.",
+            "stars": 5
+          }
+        },
+        {
+          "type": "review",
+          "settings": {
+            "name": "Priya Menon",
+            "title": "Bangalore · Verified Buyer",
+            "quote": "Worth every rupee. The design is minimal yet striking, and the quality of light genuinely changes the mood of the space.",
+            "stars": 5
+          }
+        }
+      ]
+    }
+  ]
 }
 {% endschema %}
