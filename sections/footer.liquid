@@ -20,11 +20,23 @@
   <div class="border-t border-white/10 py-8 px-6">
     <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6 text-sm">
       <a href="{{ routes.root_url }}" class="font-serif italic text-xl tracking-tight">Ravora</a>
+      
       <nav class="flex gap-8 text-xs tracking-[0.2em] uppercase text-muted-foreground font-light">
         <a href="/collections/all" class="hover:text-white transition-colors">Collection</a>
         <a href="/pages/about" class="hover:text-white transition-colors">About</a>
       </nav>
-      <p class="text-xs text-muted-foreground font-light">© {{ 'now' | date: '%Y' }} RAVORA. All rights reserved.</p>
+      
+      <div class="flex flex-col items-center md:items-end gap-3 text-xs text-muted-foreground font-light">
+        <!-- Dynamic Policy Links -->
+        <div class="flex flex-wrap justify-center gap-4">
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}
+              <a href="{{ policy.url }}" class="hover:text-white transition-colors">{{ policy.title }}</a>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+        <p>© {{ 'now' | date: '%Y' }} RAVORA. All rights reserved.</p>
+      </div>
     </div>
   </div>
 </footer>
