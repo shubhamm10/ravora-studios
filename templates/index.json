@@ -224,19 +224,27 @@
         },
         "gallery1": {
           "type": "gallery_image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/0b5ceea0-94fa-11f0-b059-7de4eebe3882.jpg"
+          }
         },
         "gallery2": {
           "type": "gallery_image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/303f61e0-c56e-11f0-9d0c-a3d9be89bca0.jpg"
+          }
         },
         "gallery3": {
           "type": "gallery_image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/d98a403a24829e0f.jpg"
+          }
         },
         "gallery4": {
           "type": "gallery_image",
-          "settings": {}
+          "settings": {
+            "image": "shopify://shop_images/0b5ceea0-94fa-11f0-b059-7de4eebe3882.jpg"
+          }
         }
       },
       "block_order": [
