@@ -1,0 +1,18 @@
+<div class="pt-36 pb-24 px-6">
+  <div class="max-w-4xl mx-auto">
+    <!-- Page Title -->
+    <h1 class="text-4xl md:text-5xl font-serif italic tracking-tight mb-8">{{ page.title }}</h1>
+
+    <!-- Page Content -->
+    <div class="prose prose-invert max-w-none prose-p:text-muted-foreground prose-p:font-light prose-p:leading-relaxed prose-headings:font-serif prose-headings:font-normal prose-headings:tracking-tight prose-a:text-primary hover:prose-a:text-primary/80 prose-hr:border-white/10 prose-li:text-muted-foreground prose-li:font-light marker:text-primary prose-strong:text-white">
+      {{ page.content }}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Page Content",
+  "settings": []
+}
+{% endschema %}
