@@ -7,7 +7,8 @@
   </div>
   {% endif %}
   <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-    <nav class="hidden md:flex gap-8 items-center text-sm tracking-widest uppercase font-light">
+    <!-- Left Navigation -->
+    <nav class="hidden md:flex flex-1 gap-8 items-center text-sm tracking-widest uppercase font-light">
       {% for link in linklists.main-menu.links %}
         <a href="{{ link.url }}" class="hover:text-primary transition-colors">{{ link.title }}</a>
       {% else %}
@@ -16,8 +17,24 @@
         <a href="/pages/about" class="hover:text-primary transition-colors">ABOUT</a>
       {% endfor %}
     </nav>
-    <a href="{{ routes.root_url }}" class="text-3xl font-serif tracking-tight italic">Ravora</a>
-    <div class="flex items-center gap-6">
+    
+    <!-- Mobile left spacer to balance flex -->
+    <div class="flex-1 md:hidden"></div>
+
+    <!-- Center Logo -->
+    <a href="{{ routes.root_url }}" class="flex-shrink-0 text-center">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 400 | image_tag: 
+          class: 'h-auto object-contain mx-auto',
+          style: 'max-width: ' | append: section.settings.logo_width | append: 'px;'
+        }}
+      {%- else -%}
+        <span class="text-3xl font-serif tracking-tight italic">Ravora</span>
+      {%- endif -%}
+    </a>
+
+    <!-- Right Icons -->
+    <div class="flex flex-1 items-center justify-end gap-6">
       <a href="{{ routes.search_url }}" class="hover:text-primary transition-colors">
         <span class="visually-hidden">Search</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
@@ -64,6 +81,21 @@
 {
   "name": "Header",
   "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "default": 100,
+      "unit": "px",
+      "label": "Custom logo width"
+    },
     {
       "type": "text",
       "id": "announcement_text",
