@@ -1,7 +1,57 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
     "sections": {
         "main": {
-            "type": "main-product"
+            "type": "main-product",
+            "blocks": {
+                "materials": {
+                    "type": "accordion",
+                    "settings": {
+                        "title": "Materials & Composition",
+                        "content": "<p>3D printed using plant-based bioplastics (PLA) and recycled bio-polymers. Each layer is precisely deposited to create a unique light-diffusing texture.</p>",
+                        "icon": "material"
+                    }
+                },
+                "features": {
+                    "type": "accordion",
+                    "settings": {
+                        "title": "Features & Specifications",
+                        "content": "<p>• LED compatible (bulb not included)<br>• E27 socket type<br>• 3D printed sculptural body<br>• Hand-finished surface<br>• Indoor use only<br>• Cord length: 1.5m with switch</p>",
+                        "icon": "care"
+                    }
+                },
+                "dimensions": {
+                    "type": "accordion",
+                    "settings": {
+                        "title": "Dimensions",
+                        "content": "<p>Varies by model. Typical range:<br>• Height: 20–35 cm<br>• Width: 15–25 cm<br>• Weight: 300g – 800g</p>",
+                        "icon": "dimensions"
+                    }
+                },
+                "shipping": {
+                    "type": "accordion",
+                    "settings": {
+                        "title": "Shipping & Delivery",
+                        "content": "<p>Each lamp is made to order. Please allow 5–7 business days for production.<br>• Free shipping on orders above ₹1500<br>• Carefully packed in custom protective casing<br>• Pan-India delivery via tracked courier</p>",
+                        "icon": "shipping"
+                    }
+                }
+            },
+            "block_order": [
+                "materials",
+                "features",
+                "dimensions",
+                "shipping"
+            ],
+            "settings": {}
         }
     },
     "order": [
