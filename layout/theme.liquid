@@ -60,9 +60,9 @@
         }
       }
     </script>
-     {% render 'sr-checkout' %} 
+     {% comment %} {% render 'sr-checkout' %}  {% endcomment %}
     <!-- Global Time Zone Script Shiprocket Checkout Start -->
-    <script>
+    {% comment %} <script>
   function getUserTimezone() {
     return Intl.DateTimeFormat().resolvedOptions().timeZone;
   }
@@ -90,7 +90,7 @@
     renderButton(isIndia);
   }
   checkAndSetButtonVisibility();
-</script> 
+</script>  {% endcomment %}
 <!-- Global Time Zone Script Shiprocket Checkout End  -->
   </head>
 
