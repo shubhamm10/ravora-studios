@@ -1,0 +1,61 @@
+<article class="relative z-10 w-full pt-32 pb-24 overflow-hidden" itemscope itemtype="http://schema.org/BlogPosting">
+  <div class="max-w-4xl mx-auto px-6 mb-16 text-center reveal is-visible">
+    <div class="mb-6 flex items-center justify-center gap-4 text-sm text-muted-foreground uppercase tracking-widest">
+      {% if article.tags.size > 0 %}
+        <span class="text-primary">{{ article.tags | first }}</span>
+        <span class="w-1.5 h-1.5 rounded-full bg-white/20"></span>
+      {% endif %}
+      <span itemprop="datePublished">{{ article.published_at | time_tag: format: 'date' }}</span>
+    </div>
+    <h1 class="text-4xl md:text-5xl lg:text-6xl font-serif leading-tight mb-8" itemprop="headline">{{ article.title }}</h1>
+    {%- if section.settings.show_author -%}
+      <div class="flex items-center justify-center gap-3" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="text-white/70" itemprop="name">By {{ article.author }}</span>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if article.image -%}
+    <div class="max-w-6xl mx-auto px-6 mb-20 reveal reveal-scale is-visible">
+      <div class="relative w-full aspect-[21/9] md:aspect-[2.35/1] overflow-hidden rounded-2xl border border-white/10 glass">
+        <img srcset="
+          {% if article.image.width >= 350 %}{{ article.image | image_url: width: 350 }} 350w,{% endif %}
+          {% if article.image.width >= 750 %}{{ article.image | image_url: width: 750 }} 750w,{% endif %}
+          {% if article.image.width >= 1100 %}{{ article.image | image_url: width: 1100 }} 1100w,{% endif %}
+          {% if article.image.width >= 1500 %}{{ article.image | image_url: width: 1500 }} 1500w,{% endif %}
+          {% if article.image.width >= 2200 %}{{ article.image | image_url: width: 2200 }} 2200w,{% endif %}"
+          src="{{ article.image | image_url: width: 1100 }}"
+          sizes="(min-width: 1200px) 1100px, (min-width: 750px) calc(100vw - 3rem), calc(100vw - 3rem)"
+          alt="{{ article.image.alt | escape }}"
+          class="w-full h-full object-cover transition-transform duration-1000 hover:scale-105"
+          itemprop="image"
+          loading="eager"
+        >
+      </div>
+    </div>
+  {%- endif -%}
+
+  <div class="max-w-3xl mx-auto px-6 prose prose-invert prose-lg prose-p:text-muted-foreground prose-headings:font-serif prose-headings:font-normal prose-a:text-primary hover:prose-a:text-primary/80 prose-img:rounded-xl prose-img:border prose-img:border-white/10 reveal reveal-stagger is-visible" itemprop="articleBody">
+    {{ article.content }}
+  </div>
+
+  <div class="max-w-3xl mx-auto px-6 mt-20 pt-10 border-t border-white/10 text-center reveal is-visible">
+    <a href="{{ blog.url }}" class="inline-flex items-center justify-center px-8 py-3 rounded-full border border-white/20 glass hover:bg-white hover:text-black transition-all duration-300 uppercase tracking-widest text-sm">
+      Back to {{ blog.title }}
+    </a>
+  </div>
+</article>
+
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "default": true,
+      "label": "Show author"
+    }
+  ]
+}
+{% endschema %}
