@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -6,7 +15,47 @@
     },
     "assembly-guide": {
       "type": "assembly-guide",
-      "settings": {}
+      "blocks": {
+        "video_gLrg3Y": {
+          "type": "video",
+          "settings": {
+            "title": "Lamp Assembly",
+            "description": "Learn how to put together your lamp in a few easy steps.",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq31TC8",
+            "time": "5 mins",
+            "product_url": ""
+          }
+        },
+        "video_jN3yRh": {
+          "type": "video",
+          "settings": {
+            "title": "Lamp Assembly",
+            "description": "Learn how to put together your lamp in a few easy steps.",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq31TC8",
+            "time": "5 mins",
+            "product_url": ""
+          }
+        },
+        "video_Rww7FJ": {
+          "type": "video",
+          "settings": {
+            "title": "Lamp Assembly",
+            "description": "Learn how to put together your lamp in a few easy steps.",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq31TC8",
+            "time": "5 mins",
+            "product_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "video_gLrg3Y",
+        "video_jN3yRh",
+        "video_Rww7FJ"
+      ],
+      "settings": {
+        "title": "Assembly Guides",
+        "subtitle": "Watch step-by-step videos to set up your Ravora lamps perfectly."
+      }
     }
   },
   "order": [
