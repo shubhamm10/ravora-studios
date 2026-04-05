@@ -9,10 +9,6 @@
  */
 {
   "sections": {
-    "main": {
-      "type": "main-page",
-      "settings": {}
-    },
     "assembly-guide": {
       "type": "assembly-guide",
       "blocks": {
@@ -59,7 +55,6 @@
     }
   },
   "order": [
-    "main",
     "assembly-guide"
   ]
 }
